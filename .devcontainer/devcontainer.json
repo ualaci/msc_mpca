@@ -1,0 +1,19 @@
+{
+  "name": "Scala FP - Mestrado",
+  "image": "sbtscala/scala-sbt:eclipse-temurin-alpine-25.0.1_8_1.12.8_3.8.3",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "scalameta.metals",
+        "scala-lang.scala"
+      ],
+      "settings": {
+        "metals.serverVersion": "latest.snapshot",
+        "metals.showInferredType": true,
+        "metals.enableSemanticHighlighting": true
+      }
+    }
+  },
+  "remoteUser": "root",
+  "postCreateCommand": "sbt update"
+}
