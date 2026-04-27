@@ -1,0 +1,25 @@
+# Scala/SBT
+target/
+**/target/
+project/project/
+bin/
+*.class
+*.out
+
+# Metals (Scala IDE)
+.metals/
+.bloop/
+.bsp/
+.scala-build/
+.ammonite/
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# OS Files
+.DS_Store
+Thumbs.db
