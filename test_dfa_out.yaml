@@ -1,0 +1,28 @@
+initial_state: q0
+alphabet:
+- '0'
+- '1'
+transitions:
+- from: q0
+  symbol: '0'
+  to:
+  - qd2
+- from: q0
+  symbol: '1'
+  to:
+  - qd1
+- from: qd2
+  symbol: '0'
+  to:
+  - qd2
+- from: qd2
+  symbol: '1'
+  to:
+  - qd1
+type: dfa
+final_states:
+- qd1
+states:
+- q0
+- qd1
+- qd2

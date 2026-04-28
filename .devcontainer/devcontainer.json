@@ -8,7 +8,6 @@
         "scala-lang.scala"
       ],
       "settings": {
-        "metals.serverVersion": "latest.snapshot",
         "metals.showInferredType": true,
         "metals.enableSemanticHighlighting": true
       }
