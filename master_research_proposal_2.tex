@@ -9,6 +9,7 @@
 % \setbeamertemplate{headline}{}
 % \setbeamertemplate{footline}{}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[portuguese]{babel}
 \usepackage{hyperref}
 \usepackage{graphicx}
@@ -65,9 +66,9 @@
 \begin{frame}{O Desafio da Indústria Automotiva -- O Gargalo dos SDVs}
     \begin{itemize}
         \item \textbf{A Mudança de Paradigma:} A indústria transita do modelo focado em hardware para os Veículos Definidos por Software (SDVs), onde capacidades e serviços evoluem continuamente via atualizações \textit{Over-The-Air} (OTA).
-        \item \textbf{Arquiteturas Zonais e Restrição de Hardware:} Para reduzir cabeamento, a arquitetura zonal concentra o processamento em Unidades Centrais de Alta Performance (HPCUs). O desafio crítico é rotear grandes fluxos de sensores de alta banda junto a telemetria em processadores de borda (ARM) com recursos severamente restritos.
-        \item \textbf{A Falha do Padrão Atual:} O middleware robótico padrão da indústria (ROS 2 e DDS) apresenta altíssimo \textit{overhead} de CPU e consumo de memória ao lidar com essas cargas em tempo real, devido à contínua cópia e serialização de dados através do kernel do sistema operacional.
-        \item \textbf{Degradação de Rede e Teleoperação:} Quando o veículo opera sob redes não-ideais (4G/5G/Satélite), tecnologias padrão perdem o determinismo temporal. Isso gera enormes picos de latência e perda de sincronia crítica entre o veículo físico e o seu \textit{Digital Twin} na nuvem.
+        \item \textbf{Arquiteturas Zonais e Restrição de Hardware:} Concentração do processamento em Unidades Centrais (HPCUs). O desafio é rotear fluxos massivos de sensores em processadores de borda com recursos restritos.
+        \item \textbf{Gargalos de Middleware:} O padrão da indústria (ROS 2 e DDS) consome muita CPU e memória em tempo real devido à serialização e contínua cópia de dados no kernel.
+        \item \textbf{Degradação de Rede e Teleoperação:} Em redes instáveis (4G/5G/Satélite), a perda de determinismo gera picos de latência e dessincroniza o veículo físico do seu Gêmeo Digital na nuvem.
     \end{itemize}
 \end{frame}
 
@@ -79,12 +80,12 @@
     \begin{itemize}
         \item \textbf{O Ecossistema Emergente:} Avaliar empiricamente a stack \textbf{Eclipse SDV}, impulsionada pelas principais montadoras globais para superar as limitações do ROS 2 na comunicação veicular.
         \item \textbf{Tecnologias Core Investigadas:}
-        \begin{itemize}
-            \item \textbf{Eclipse iceoryx:} Viabiliza uma comunicação inter-processos verdadeiramente ``zero-copy'', contornando a stack de rede para economizar ciclos vitais de CPU na borda.
-            \item \textbf{Eclipse Kuksa:} Padroniza a orquestração da telemetria veicular para a nuvem utilizando a especificação universal da COVESA (VSS).
-            \item \textbf{Eclipse Zenoh:} Um roteador de publicação/assinatura altamente otimizado em Rust que supera o DDS tradicional em vazão (\textit{throughput}) e baixa latência, suportando microcontroladores restritos.
-        \end{itemize}
-        \item \textbf{A Pergunta de Pesquisa:} Determinar os limites exatos de desempenho, consistência de estado e custo computacional do Eclipse SDV em comparação ao ROS 2/DDS em hardwares ARM de borda, sob condições de rede não-ideais (degradadas).
+              \begin{itemize}
+                  \item \textbf{Eclipse iceoryx:} Viabiliza uma comunicação inter-processos verdadeiramente ``zero-copy'', contornando a stack de rede para economizar ciclos vitais de CPU na borda.
+                  \item \textbf{Eclipse Kuksa:} Padroniza a orquestração da telemetria veicular para a nuvem utilizando a especificação universal da COVESA (VSS).
+                  \item \textbf{Eclipse Zenoh:} Um roteador de publicação/assinatura altamente otimizado em Rust que supera o DDS tradicional em vazão (\textit{throughput}) e baixa latência, suportando microcontroladores restritos.
+              \end{itemize}
+        \item \textbf{Proposta da pesquisa:} Determinar limites exatos de desempenho, consistência de estado e custo computacional do Eclipse SDV comparado ao ROS 2/DDS em hardwares ARM de borda, sob redes não-ideais (degradadas).
     \end{itemize}
 \end{frame}
 
@@ -101,19 +102,57 @@
     \end{itemize}
 \end{frame}
 
+\section{Proposta de parceria}
+% --- SLIDE 1 ---
+\begin{frame}{Proposta de Parceria: Objetivos e Impactos Estratégicos 1}
+    \begin{block}{Etapa 1: Infraestrutura (Foco Principal)}
+        \small
+        \textbf{A Necessidade Técnica:} Utilização de plataformas de borda embarcadas (ex: processadores ARM / NVIDIA Jetson) disponíveis na empresa. Os testes são executados de forma totalmente isolada, sem causar interrupções ou impacto no fluxo dos projetos corporativos atuais.\\ \vspace{1.2ex}
+
+        \textbf{O Cenário de Aplicação:} O intuito é espelhar o gargalo real enfrentado por frotas em produção. O hardware processará simultaneamente cargas massivas de dados (como fluxos de vídeo em alta resolução) em paralelo com telemetria veicular de alta frequência, reproduzindo fidedignamente o estresse computacional de um Veículo Definido por Software (SDV).\\ \vspace{1.2ex}
+
+        \textbf{O Retorno Financeiro:} A pesquisa entregará uma matriz de decisão detalhando os limites exatos do software. Isso viabiliza o design de arquiteturas enxutas e previne o \textit{superprovisionamento} — a compra desnecessária de processadores caros pela engenharia apenas para compensar a ineficiência do middleware.
+    \end{block}
+\end{frame}
+
+% --- SLIDE 2 ---
+\begin{frame}{Proposta de Parceria: Objetivos e Impactos Estratégicos 2}
+    \begin{block}{Etapa 2: MVP Comparativo (Aplicação Direta)}
+        \small
+        \textbf{Implementação Prática:} Desenvolvimento de um Produto Mínimo Viável (MVP) incorporando o ecossistema \textit{Eclipse SDV} (\textit{iceoryx}, \textit{Kuksa} e \textit{Zenoh}), apontado pela indústria automotiva global como a solução para as limitações arquitetônicas do padrão ROS 2.\\ \vspace{1.5ex}
+
+        \textbf{Comparativo com a Infraestrutura Atual:} O MVP será submetido a redes estocásticas degradadas (simulando instabilidade em conexões 4G/5G). Suas métricas de latência e consumo de CPU serão comparadas diretamente com a stack legada baseada em \textit{ROS} (tecnologia fundamental de sistemas como a atual \textit{VAL Stack}).\\ \vspace{1.5ex}
+
+        \textbf{Segurança e \textit{Future-Proofing}:} O resultado fornece à empresa a validação matemática de determinismo temporal. Isso garante extrema confiabilidade para operações de missão crítica, como teleoperação de caminhões em áreas com perda de sinal, pavimentando a evolução segura da frota.
+    \end{block}
+\end{frame}
+
 %------------------------------------------------
 \section{Proposta de Valor}
 %------------------------------------------------
-
-\begin{frame}{Proposta de Valor -- Benefícios da Parceria para a [Nome da Empresa]}
+\begin{frame}{Proposta de Valor -- Resultados Técnicos e Impacto}
     \begin{itemize}
-        \item \textbf{Prevenção de Desperdício em Hardware:} Produzir uma matriz detalhada de limites de tecnologias (ROS 2 vs. Eclipse SDV). Isso viabiliza à engenharia da empresa projetar arquiteturas precisas, evitando o superprovisionamento de hardware dispendioso para compensar middlewares ineficientes.
-        \item \textbf{Confiabilidade em Missões Críticas:} Validar o determinismo (previsibilidade de tempo) de conectividade de ponta. Requisito essencial para garantir a segurança em operações de frotas autônomas e teleoperação em ambientes com rede celular instável.
-        \item \textbf{Inovação e Coautoria:} Preencher uma lacuna atual na literatura técnica (inexistência de \textit{benchmarks} da pipeline completa Eclipse SDV em redes degradadas). A empresa será coautora e se posicionará na fronteira de inovação do ecossistema \textit{open-source} global de SDVs.
-        \item \textbf{O Diferencial Estratégico (O Fator Bônus):} Há total sinergia entre a pesquisa e a atuação atual do pesquisador na empresa. A expertise diária no desenvolvimento da \textbf{VAL Stack} --- gerenciando instâncias conteinerizadas de ROS, simulação via Gazebo Classic em múltiplos hardwares e criação de interfaces (Lichtblick) --- garante que o pesquisador tem o domínio técnico prático para executar este \textit{testbench} complexo rapidamente. Mais do que isso, garante que o conhecimento avançado em \textit{ROS 2} e \textit{Eclipse SDV} absorvido na pesquisa será diretamente transferível para os projetos da empresa, preparando a transição natural da infraestrutura atual para os novos padrões da indústria.
+        \item \textbf{Otimização de Hardware:} Matriz de comparação (ROS 2 vs. Eclipse SDV) para dimensionamento preciso de arquiteturas, eliminando custos de superprovisionamento.
+
+              \vspace{1.5ex}
+        \item \textbf{Segurança Operacional em Ambientes Reais:} Garantir que o veículo autônomo responda sem atrasos mesmo quando as redes móveis (4G, 5G, Satélite) ficarem lentas ou falharem, mitigando riscos de acidentes.
+
+              \vspace{1.5ex}
+        \item \textbf{Transferência Tecnológica e Redução de Custos (P\&D):} O conhecimento em \textit{ROS 2} e \textit{Eclipse SDV} gerado pelo experimento poderá ser internalizado pela engenharia da empresa, otimizando projetos internos ao reduzir custos de desenvolvimento de novas arquiteturas.
     \end{itemize}
 \end{frame}
 
+\begin{frame}{Proposta de Valor -- Sinergia e Diferencial Estratégico}
+    \begin{itemize}
+        \item \textbf{Mitigação de Risco na Execução (Domínio Prático):} A experiência diária gerenciando o ambiente da \textit{VAL Stack} (instâncias ROS 1 Noetic, simulações em Gazebo e interfaces Lichtblick) garante domínio técnico competente. Isso assegura execução ágil, sem curvas de aprendizado que atrasem os projetos.
+
+              \vspace{1.5ex}
+        \item \textbf{\textit{Future-Proofing} e Alinhamento de Longo Prazo:} A parceria atua como um laboratório seguro de inovação, preparando a transição natural da infraestrutura robótica atual para os novos padrões da indústria global de veículos definidos por software.
+
+              \vspace{1.5ex}
+        \item \textbf{Propriedade Intelectual e Liderança Setorial:} Acesso exclusivo à \textbf{Matriz de Decisão}, com potencial de patentear métodos autônomos. A coautoria em pesquisas de fronteira posicionará a empresa como pioneira na literatura (IEEE/ACM), destacando-a no ecossistema \textit{open-source} global.
+    \end{itemize}
+\end{frame}
 %------------------------------------------------
 \section{Cronograma de Execução}
 %------------------------------------------------
