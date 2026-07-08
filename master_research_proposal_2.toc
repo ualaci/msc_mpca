@@ -1,0 +1,6 @@
+\babel@toc {portuguese}{}\relax 
+\beamer@sectionintoc {1}{O Desafio da Indústria Automotiva}{2}{0}{1}
+\beamer@sectionintoc {2}{A Solução Proposta}{3}{0}{2}
+\beamer@sectionintoc {3}{Rigor Metodológico}{4}{0}{3}
+\beamer@sectionintoc {4}{Proposta de Valor}{5}{0}{4}
+\beamer@sectionintoc {5}{Cronograma de Execução}{6}{0}{5}
