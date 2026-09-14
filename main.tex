@@ -1,0 +1,147 @@
+%----------------------------------------------------------------------------------------
+%    PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[aspectratio=169,xcolor=dvipsnames]{beamer}
+\usetheme{DEXPI}
+\logo{}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{pgfgantt}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Configuração de cores para o código
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+%----------------------------------------------------------------------------------------
+%    TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{NOX: Rumo a um Sistema Operacional para Redes}
+\subtitle{Análise do Artigo e Novo Paradigma de Gerenciamento}
+
+\author{Apresentação de Seminário}
+\institute{Programa de Pós-Graduação}
+\date{\today}
+
+%----------------------------------------------------------------------------------------
+%    PRESENTATION SLIDES
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+%------------------------------------------------
+\section{Introdução e Motivação}
+%------------------------------------------------
+
+\begin{frame}{O Cenário Atual: A Complexidade do Gerenciamento}
+    \begin{itemize}
+        \item \textbf{Desafio de Gestão:} Redes corporativas são notoriamente difíceis de gerenciar, exigindo constante configuração de componentes individuais.
+        \item \textbf{Baixo Nível de Abstração:} As configurações dependem da topologia e de endereços físicos (MAC, IP), tornando políticas complexas difíceis de implementar.
+        \item \textbf{Analogia Histórica:} As redes de hoje se assemelham aos primórdios da computação, onde programas eram escritos em linguagem de máquina para hardwares específicos, sem as abstrações de um Sistema Operacional.
+        \item \textbf{O Problema Central:} Como migrar de algoritmos distribuídos e configurações fragmentadas para um controle unificado e programável?
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section{A Proposta: NOX}
+%------------------------------------------------
+
+\begin{frame}{A Solução Proposta: NOX - Network Operating System}
+    \begin{itemize}
+        \item \textbf{Uma Nova Abstração:} Os autores propõem o \textbf{NOX}, um Sistema Operacional de Redes que fornece uma interface de programação centralizada.
+        \item \textbf{Visão Centralizada:} Permite que aplicações de gerenciamento sejam escritas como se toda a rede fosse uma única máquina.
+        \item \textbf{Nomes vs. Endereços:} Diretrizes são aplicadas sobre abstrações de alto nível (nomes de usuários e hosts) em vez de regras granulares de rede.
+        \item \textbf{Separação de Preocupações:} O NOX não gerencia a rede por si só, mas serve como ambiente de execução para aplicações de controle (ex: roteamento, controle de acesso).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Arquitetura e Funcionamento do NOX}
+    \begin{itemize}
+        \item \textbf{OpenFlow como Base:} Utiliza switches compatíveis com OpenFlow, onde o tráfego é controlado por \textit{fluxos} (cabeçalhos, contadores e ações).
+        \item \textbf{Visão Global da Rede (Network View):} Mantém o estado da topologia e ligações (nomes-endereços) de forma consistente em um banco de dados, lidando com dezenas de eventos por segundo.
+        \item \textbf{Controle de Fluxos:} O primeiro pacote de um fluxo não reconhecido é enviado ao controlador NOX, que decide a rota e instala regras nos switches daquele caminho.
+        \item \textbf{Desenvolvimento Baseado em Eventos:} Aplicações respondem a eventos como chegada de pacotes, junção de switches, ou autenticação de usuários.
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section{Resultados Obtidos}
+%------------------------------------------------
+
+\begin{frame}{Resultados e Avaliação de Desempenho}
+    \begin{itemize}
+        \item \textbf{Escalabilidade Comprovada:} Um único processo controlador do NOX em um PC genérico foi capaz de processar \textbf{100.000 inícios de fluxo por segundo}.
+        \item \textbf{Redução de Complexidade:} Na reimplementação do sistema \textit{Ethane} (controle de acesso), o código passou de \textbf{45.000 linhas de C++} (versão original) para \textbf{algumas milhares de linhas em Python} sobre o NOX.
+        \item \textbf{Estabilidade Prática:} O NOX foi validado em um ambiente de produção interno com cerca de 30 hosts por mais de 6 meses, sendo a única fonte de conectividade e controle.
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section{Conclusões}
+%------------------------------------------------
+
+\begin{frame}{Conclusões dos Autores}
+    \begin{itemize}
+        \item \textbf{Viabilidade em Larga Escala:} O desenvolvimento do NOX prova ser possível construir um Sistema Operacional para Redes altamente escalável e eficiente.
+        \item \textbf{Desenvolvimento Simplificado:} A interface pragmática em torno de eventos, namespaces e uma visão centralizada torna a criação de aplicações de gerência muito mais intuitiva.
+        \item \textbf{Inovação Direcionada:} A infraestrutura permite que desenvolvedores se concentrem na lógica de negócios e segurança, sem se preocuparem com a complexidade subjacente do protocolo distribuído.
+        \item \textbf{Sistema Aberto:} A liberação pública do NOX visa engajar a comunidade acadêmica e industrial a explorar novas fronteiras em Software-Defined Networking (SDN).
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+\section{Comentários Pessoais}
+%------------------------------------------------
+
+\begin{frame}{Comentários Pessoais: Lições e Dificuldades}
+    \begin{block}{Lições Aprendidas}
+        \small
+        \begin{itemize}
+            \item A separação entre o plano de controle (inteligência) e o plano de dados (encaminhamento) é uma quebra de paradigma poderosa.
+            \item Perceber a infraestrutura como software permite agilidade; o uso de abstrações de alto nível (como usuários ao invés de IPs) aproxima a engenharia de redes da engenharia de software tradicional.
+        \end{itemize}
+    \end{block}
+    
+    \begin{block}{Dificuldades Encontradas}
+        \small
+        \begin{itemize}
+            \item \textbf{Assimilação do Novo Modelo:} Inicialmente, foi desafiador desapegar do modelo mental dos protocolos distribuídos padrão (como OSPF ou BGP) para adotar a visão centralizada baseada em controladores.
+            \item \textbf{Confiabilidade e Gargalos:} Compreender como a arquitetura contorna a latência entre o controlador e os switches e lida com o potencial "ponto único de falha".
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+    \Huge{\centerline{\textbf{Obrigado}}}
+\end{frame}
+
+\end{document}

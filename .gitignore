@@ -1,0 +1,25 @@
+# Core auxiliary output files
+*.aux
+*.bcf
+*.blg
+*.bbl
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# Beamer specific files
+*.nav
+*.snm
+*.vrb
+
+# Editor backup and log files
+*.bak
+compiling_log.txt
+
+# Do not ignore generated PDF files
+!*.pdf
