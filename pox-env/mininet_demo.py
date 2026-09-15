@@ -1,24 +1,3 @@
-#!/bin/bash
-
-echo "========================================="
-echo " Starting Software-Defined Network Demo  "
-echo "========================================="
-
-# 1. Start the Open vSwitch background service
-service openvswitch-switch start
-mn -c > /dev/null 2>&1
-
-# 2. Start the POX Controller in the background (using l2_learning instead of hub)
-echo "[*] Starting POX Controller with 'Learning Switch' application..."
-export PYTHONPATH=/opt/pox:$PYTHONPATH
-python3 /opt/pox/pox.py log.level --DEBUG forwarding.l2_learning > /workspace/pox.log 2>&1 &
-POX_PID=$!
-
-sleep 3
-echo "[*] Controller is running! (Logs saved to pox-env/pox.log)"
-
-# 3. Create a custom Mininet Python script to run our test sequence
-cat << 'EOF' > /workspace/mininet_demo.py
 from mininet.net import Mininet
 from mininet.node import RemoteController, OVSKernelSwitch
 from mininet.topo import SingleSwitchTopo
@@ -53,15 +32,3 @@ print(h1.cmd('ping -c 1 ' + h2.IP()))
 
 print("\n[*] Demo sequence complete. Shutting down virtual network...")
 net.stop()
-EOF
-
-# Run the custom Mininet demo
-python3 /workspace/mininet_demo.py
-
-# 4. Clean up
-kill $POX_PID
-mn -c > /dev/null 2>&1
-
-echo "========================================="
-echo " Demo Complete!"
-echo "========================================="

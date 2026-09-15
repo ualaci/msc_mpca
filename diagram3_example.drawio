@@ -1,95 +1,77 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0" version="21.6.8">
-  <diagram id="sdn_architecture" name="SDN Zones">
-    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="sdn_l2_learning" name="L2 Learning">
+    <mxGraphModel dx="1127" dy="438" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- Zone 3 Background -->
-        <mxCell id="zone3" value="&lt;b&gt;ZONE 3: NOX/POX CONTROLLER (The &quot;Network OS&quot;)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;spacingTop=10;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="40" y="40" width="740" height="240" as="geometry" />
+        <mxCell id="zone3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;spacingTop=10;fontSize=14;" value="&lt;b&gt;ZONE 3: NOX/POX CONTROLLER (The &quot;Network OS&quot;)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="240" width="740" x="40" y="40" as="geometry" />
         </mxCell>
-
-        <!-- Zone 2 Background -->
-        <mxCell id="zone2" value="&lt;b&gt;ZONE 2: THE NETWORK INFRASTRUCTURE (Data Plane)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fillColor=#d5e8d4;strokeColor=#82b366;dashed=1;spacingTop=10;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="40" y="320" width="740" height="200" as="geometry" />
+        <mxCell id="zone2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fillColor=#d5e8d4;strokeColor=#82b366;dashed=1;spacingTop=10;fontSize=14;" value="&lt;b&gt;ZONE 2: THE NETWORK INFRASTRUCTURE (Data Plane)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="200" width="740" x="40" y="320" as="geometry" />
         </mxCell>
-
-        <!-- Zone 1 Background -->
-        <mxCell id="zone1" value="&lt;b&gt;ZONE 1: END DEVICES (Hosts)&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;spacingTop=10;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="40" y="560" width="740" height="140" as="geometry" />
+        <mxCell id="zone1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;spacingTop=10;fontSize=14;" value="&lt;b&gt;ZONE 1: END DEVICES (Hosts)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="140" width="740" x="40" y="560" as="geometry" />
         </mxCell>
-
-        <!-- Nodes in Zone 3 -->
-        <mxCell id="mgmt_app" value="[ Management Application ]&lt;br&gt;(simplehub.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="220" y="90" width="200" height="60" as="geometry" />
+        <mxCell id="mgmt_app" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" value="[ Management Application ]&lt;br&gt;(l2_learning.py)" vertex="1">
+          <mxGeometry height="60" width="220" x="270" y="80" as="geometry" />
         </mxCell>
-
-        <mxCell id="core_ctrl" value="[ Core Controller Process ]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="220" y="210" width="200" height="50" as="geometry" />
+        <mxCell id="core_ctrl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;" value="[ Core Controller Process ]" vertex="1">
+          <mxGeometry height="50" width="220" x="270" y="210" as="geometry" />
         </mxCell>
-
-        <mxCell id="concepts3" value="&lt;div style=&quot;text-align: left; padding: 5px;&quot;&gt;&lt;b&gt;Concepts from Article:&lt;/b&gt;&lt;br&gt;- &quot;Network View (Observation)&quot;&lt;br&gt;- &quot;Determine Route (Control)&quot;&lt;br&gt;- &quot;Hardware-independent instructions&quot;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;align=left;" vertex="1" parent="1">
-          <mxGeometry x="500" y="90" width="260" height="100" as="geometry" />
+        <mxCell id="switch" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;" value="&lt;b&gt;Switch (s1)&lt;/b&gt;&lt;hr&gt;Flow Table:&lt;br&gt;Regra Instalada!" vertex="1">
+          <mxGeometry height="80" width="220" x="270" y="380" as="geometry" />
         </mxCell>
-
-        <!-- Nodes in Zone 2 -->
-        <mxCell id="switch" value="&lt;b&gt;Switch (s1)&lt;/b&gt;&lt;hr&gt;Flow Table: Empty (No Match)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="180" y="380" width="280" height="80" as="geometry" />
+        <mxCell id="note_miss" parent="1" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" value="2. Table Miss&lt;br&gt;(No Match -&amp;gt; Send to POX)" vertex="1">
+          <mxGeometry height="40" width="180" x="80" y="400" as="geometry" />
         </mxCell>
-
-        <mxCell id="concepts2" value="&lt;div style=&quot;text-align: left; padding: 5px;&quot;&gt;&lt;b&gt;Concepts from Article:&lt;/b&gt;&lt;br&gt;- &quot;OpenFlow Switch Abstraction&quot;&lt;br&gt;- &quot;Flow-Initiation&quot;&lt;br&gt;- &quot;Counters &amp;amp; Actions&quot;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;align=left;" vertex="1" parent="1">
-          <mxGeometry x="500" y="370" width="260" height="100" as="geometry" />
-        </mxCell>
-
-        <!-- Nodes in Zone 1 -->
-        <mxCell id="host1" value="[ Host 1 ]" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="100" y="620" width="90" height="50" as="geometry" />
-        </mxCell>
-
-        <mxCell id="host2" value="[ Host 2 ]" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="275" y="620" width="90" height="50" as="geometry" />
-        </mxCell>
-
-        <mxCell id="host3" value="[ Host 3 ]" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="450" y="620" width="90" height="50" as="geometry" />
-        </mxCell>
-
-        <!-- Edges -->
-        <mxCell id="edge_ping" value="1. Ping" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.15;entryY=1;entryDx=0;entryDy=0;labelBackgroundColor=none;" edge="1" parent="1" source="host1" target="switch">
-          <mxGeometry x="-0.2" y="15" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <mxCell id="edge_nomatch" value="2. No Match&lt;br&gt;(Send to controller)&lt;br&gt;&lt;br&gt;3. PacketIn Event&lt;br&gt;(Observation)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;labelBackgroundColor=none;" edge="1" parent="1" source="switch" target="core_ctrl">
-          <mxGeometry x="0.1" y="-40" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <mxCell id="edge_decision" value="4. Decision: Flood" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=none;" edge="1" parent="1" source="mgmt_app" target="core_ctrl">
-          <mxGeometry x="-0.2" y="20" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <mxCell id="edge_instruction" value="5. OpenFlow Instruction&lt;br&gt;(Control: Action = FLOOD)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;labelBackgroundColor=none;" edge="1" parent="1" source="core_ctrl" target="switch">
-          <mxGeometry x="-0.1" y="55" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-
-        <mxCell id="edge_exec2" value="6. Executes Action&lt;br&gt;(Flood)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;labelBackgroundColor=none;" edge="1" parent="1" source="switch" target="host2">
+        <mxCell id="edge_miss" edge="1" parent="1" source="note_miss" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;dashed=1;" target="switch">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <mxCell id="edge_exec3" value="6. Executes Action&lt;br&gt;(Flood)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.85;exitY=1;exitDx=0;exitDy=0;labelBackgroundColor=none;" edge="1" parent="1" source="switch" target="host3">
-          <mxGeometry x="0.1" y="20" relative="1" as="geometry">
+        <mxCell id="host1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;" value="[Host 1]" vertex="1">
+          <mxGeometry height="50" width="90" x="160" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="host2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;" value="[Host 2]" vertex="1">
+          <mxGeometry height="50" width="90" x="510" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_ping" edge="1" parent="1" source="host1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;labelBackgroundColor=none;strokeWidth=3;strokeColor=light-dark(#000000,#FF3333);" target="switch" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="B3u4j5003HB4L_-iK0WQ-3" connectable="0" parent="edge_ping" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span style=&quot;background-color: rgb(27, 29, 30); color: light-dark(rgb(0, 0, 0), rgb(0, 0, 0));&quot;&gt;1. Ping&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.0933" y="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-
+        <mxCell id="edge_packetin" edge="1" parent="1" source="switch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;labelBackgroundColor=none;strokeWidth=3;strokeColor=light-dark(#000000,#FF3333);" target="core_ctrl" value="">
+          <mxGeometry relative="1" x="0.1" y="-30" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B3u4j5003HB4L_-iK0WQ-1" connectable="0" parent="edge_packetin" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;3. PacketIn Event&lt;br&gt;(Observation)&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.319" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_decision" edge="1" parent="1" source="mgmt_app" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;labelBackgroundColor=none;strokeWidth=3;strokeColor=light-dark(#000000,#FF3333);" target="core_ctrl" value="4. Decision: Instalar Regra (Learn)">
+          <mxGeometry relative="1" x="-0.1" y="20" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_instruction" edge="1" parent="1" source="core_ctrl" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;labelBackgroundColor=none;strokeWidth=3;strokeColor=light-dark(#000000,#FF3333);" target="switch" value="">
+          <mxGeometry relative="1" x="-0.1" y="40" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="B3u4j5003HB4L_-iK0WQ-2" connectable="0" parent="edge_instruction" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;5. OpenFlow Instruction&lt;/span&gt;&lt;br style=&quot;color: rgb(0, 0, 0);&quot;&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;(Control: FLOW_MOD)&lt;/span&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.3952" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_hardware" edge="1" parent="1" source="switch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;labelBackgroundColor=none;align=left;strokeWidth=3;strokeColor=light-dark(#000000,#FF3333);" target="host2" value="6. O próximo Ping será&lt;br&gt;roteado em 0.2ms&lt;br&gt;direto no hardware!">
+          <mxGeometry relative="1" x="-0.3" y="30" as="geometry">
+            <mxPoint x="-20" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

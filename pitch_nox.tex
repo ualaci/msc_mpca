@@ -75,6 +75,19 @@
     \vspace{0.3cm}
 \end{frame}
 
+
+\begin{frame}{NOX Overview}
+    O \textit{Network Operating System} em detalhes.
+    
+    \vspace{0.5cm}
+    
+    \begin{itemize}            
+        \item \textbf{Componentes Principais:} Base framework (núcleo C++), \textit{Network View} (estado global da rede) e Aplicações de Gerenciamento.
+        \item \textbf{Granularidade de Controle:} Baseado em fluxo (\textit{flow-level control}). O controle se aplica ao primeiro pacote do fluxo, delegando o resto ao hardware.
+        \item \textbf{Abstração do Switch (OpenFlow):} Switches deixam de ter inteligência e passam a ter tabelas de fluxo simples com: \textit{Header} (Match), \textit{Counters} e \textit{Actions}.
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Arquitetura e Comportamento}
     Toda a complexidade resolvida na análise do primeiro pacote.
     
@@ -99,6 +112,23 @@
     \end{center}
 \end{frame}
 
+
+\begin{frame}{Programmatic Interface}
+    Como as aplicações interagem com o sistema operacional da rede.
+    
+    \vspace{0.5cm}
+    
+    \begin{itemize}            
+        \item \textbf{High-Level Services:} O NOX fornece funções essenciais prontas, como construção da \textit{Network View}, serviços de roteamento e resolução de nomes (identidade para endereço).
+        \item \textbf{Modelo Baseado em Eventos:} Aplicações reagem a eventos da rede gerados pelos switches (ex: \textit{PacketIn}, alteração de topologia, queda de link).
+        \item \textbf{Limitações de Runtime:}
+        \begin{itemize}
+            \item Os \textit{handlers} de eventos não podem bloquear o processamento (\textit{non-blocking}).
+            \item Uma aplicação mal estruturada pode paralisar o controlador central, sendo um desafio de interface e arquitetura.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
 \begin{frame}{Exemplo Prático (POX/Mininet)}
     Como a teoria de Observação e Controle se traduz na prática?
     
@@ -107,7 +137,7 @@
     \begin{itemize}            
         \item \textbf{Cenário Isolado:} 1 Switch Virtual (Open vSwitch) e 3 Hosts conectados.
         \item \textbf{Observação (Table Miss):} O \textit{ping} inicial gera um \textit{PacketIn} direto para o Controlador POX.
-        \item \textbf{Controle (Hub):} O POX responde com uma ação OpenFlow (OFPP\_FLOOD) anexada aos dados do pacote, permitindo o roteamento de 100\% dos pacotes no teste.
+        \item \textbf{Controle (Flow Mod):} Em resposta, o POX instala uma regra na \textit{Flow Table} do switch. O próximo \textit{ping} é roteado instantaneamente pelo hardware, sem consultar o POX!
     \end{itemize}
     
     \vspace{0.3cm}
@@ -121,6 +151,44 @@
         \vspace{0.1cm}
         \scriptsize \textit{Fonte: Elaborado pelo autor.}
     \end{center}
+\end{frame}
+
+\begin{frame}{Por Dentro do Switch: A Tabela de Fluxos}
+    Dissecando as regras injetadas pelo Controlador.
+    
+    \vspace{0.5cm}
+    
+    \begin{itemize}            
+        \item \textbf{Regra 1: A "Ida" (Ping Request)} 
+        \begin{itemize}
+            \item \textbf{Match:} \texttt{icmp, nw\_src=10.0.0.1, icmp\_type=8} 
+            \item \textbf{Ação:} \texttt{output:"s1-eth2"} (Encaminha para a porta 2)
+        \end{itemize}
+
+        \vspace{0.2cm}
+        
+        \item \textbf{Regra 2: A "Volta" (Ping Reply)} 
+        \begin{itemize}
+            \item \textbf{Match:} \texttt{icmp, nw\_src=10.0.0.2, icmp\_type=0} 
+            \item \textbf{Ação:} \texttt{output:"s1-eth1"} (Devolve para a porta 1)
+        \end{itemize}
+        
+        \vspace{0.2cm}
+        
+        \item \textbf{O Resultado:} Com as regras instaladas, os próximos pacotes sofrem um \textit{Match} direto no hardware (sem consultar o POX), reduzindo o tempo de resposta drasticamente (ex: de 10.8ms para 0.2ms).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Example Applications (Seção 4)}
+    Aplicações de controle e segurança rodando sobre o NOX.
+    
+    \vspace{0.5cm}
+    
+    \begin{itemize}            
+        \item \textbf{Controle de Acesso Baseado no Usuário:} Diferente de roteadores que usam regras rígidas de IP/MAC, o NOX gerencia tráfego baseado na identidade.
+        \item \textbf{Mobilidade da Política:} Se o usuário muda de switch físico na empresa, a rede se reconfigura para segui-lo.
+        \item \textbf{Implementação Prática (Ethane):} A reconstrução da arquitetura Ethane comprovou ser possível abstrair políticas complexas com muito menos código.
+    \end{itemize}
 \end{frame}
 
 %------------------------------------------------
@@ -139,6 +207,18 @@
     \end{itemize}
     
     \vspace{0.3cm}
+\end{frame}
+
+\begin{frame}{Related Work and Open Issues}
+    Desafios e mitigações levantados pelos autores.
+    
+    \vspace{0.5cm}
+    
+    \begin{itemize}            
+        \item \textbf{Ponto Único de Falha e Gargalo:} Centralizar o controle cria um potencial gargalo de performance e risco de indisponibilidade total.
+        \item \textbf{A Solução/Contorno:} Processamento paralelo, uso do \textit{hardware} do switch para cache dos fluxos aprovados, e clusters de controladores distribuídos.
+        \item \textbf{Segurança e Confiança:} Switches confiam cegamente no controlador. É imperativo adotar canais autenticados (TLS) para evitar sequestro do plano de controle.
+    \end{itemize}
 \end{frame}
 
 %------------------------------------------------
