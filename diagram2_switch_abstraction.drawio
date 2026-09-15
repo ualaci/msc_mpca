@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="openflow_switch" name="OpenFlow Abstraction">
+    <mxGraphModel dx="2013" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nox" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Management Applications (NOX)&lt;/b&gt;&lt;br&gt;(Passes Hardware-Independent Instructions)" vertex="1">
+          <mxGeometry height="60" width="500" x="160" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="switch" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;spacingTop=10;strokeWidth=3;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Switch (OpenFlow Abstraction)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="560" width="620" x="100" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="flowtable" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;spacingTop=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Flow Table&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left; padding-left: 20px;&quot;&gt;&lt;i&gt;* Match Logic: If multiple entries match, choose the entry with HIGHEST PRIORITY.&lt;/i&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="260" width="540" x="140" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="flowentry" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;spacingTop=5;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Flow Entry&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align: left; padding: 5px;&quot;&gt;&lt;b&gt;HEADER&amp;nbsp;&amp;nbsp;&amp;nbsp;:&lt;/b&gt; Packet match fields (Values or &#39;ANY&#39; for TCAM match)&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;text-align: left; padding: 5px;&quot;&gt;&lt;b&gt;COUNTERS :&lt;/b&gt; Updated for each matched packet&lt;/div&gt;&lt;hr&gt;&lt;div style=&quot;text-align: left; padding: 5px;&quot;&gt;&lt;b&gt;ACTIONS&amp;nbsp;&amp;nbsp;:&lt;/b&gt; Executed on the matched packet&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="460" x="180" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="actions" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;div style=&quot;text-align: left; padding: 10px;&quot;&gt;&lt;b&gt;Available Actions&lt;/b&gt;&lt;br&gt;&lt;br&gt;1. Forward as default (standard routing)&lt;br&gt;2. Forward out specified interface&lt;br&gt;3. Deny (Drop packet)&lt;br&gt;4. Forward to a controller process&lt;br&gt;5. Modify header fields (e.g., VLAN tags, Source/Dest IP, Port)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="150" width="460" x="180" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" edge="1" parent="1" source="nox" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=none;fillColor=#dae8fc;strokeColor=#6c8ebf;" target="switch" value="&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(102, 178, 255));&quot;&gt;Flow-level control instructions&lt;/span&gt;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" edge="1" parent="1" source="flowtable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" target="actions">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,64 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0">
+  <diagram id="diagrama_nox" name="Fluxo do Pacote">
+    <mxGraphModel dx="2013" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="N1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" value="Incoming Packet" vertex="1">
+          <mxGeometry height="60" width="140" x="340" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="N2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" value="Arrives at&lt;br&gt;Switch" vertex="1">
+          <mxGeometry height="60" width="140" x="340" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="N3" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" value="Matches Flow Entry?" vertex="1">
+          <mxGeometry height="80" width="160" x="330" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="N4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" value="Update Counters&lt;br&gt;&amp;amp;&lt;br&gt;Apply Actions" vertex="1">
+          <mxGeometry height="80" width="140" x="160" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="N5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" value="Forward to&lt;br&gt;Controller Process" vertex="1">
+          <mxGeometry height="80" width="140" x="587" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="N6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" value="NOX Applications" vertex="1">
+          <mxGeometry height="60" width="140" x="587" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="N7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" value="&lt;b&gt;Observation&lt;/b&gt;&lt;hr&gt;Construct Network View" vertex="1">
+          <mxGeometry height="80" width="140" x="487" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="N8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" value="&lt;b&gt;Control&lt;/b&gt;&lt;hr&gt;Determine Routing&lt;br&gt;&amp;amp; Forwarding" vertex="1">
+          <mxGeometry height="80" width="140" x="687" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="E1" edge="1" parent="1" source="N1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#0000CC);" target="N2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E2" edge="1" parent="1" source="N2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#0000CC);" target="N3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3" edge="1" parent="1" source="N3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#0000CC);" target="N4" value="">
+          <mxGeometry relative="1" x="-0.65" y="15" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZKmz-dGN67hA75K_pXEy-3" connectable="0" parent="E3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(51, 51, 255)); background-color: light-dark(rgb(255, 255, 255), rgb(255, 255, 255));&quot;&gt;Yes&lt;/span&gt;" vertex="1">
+          <mxGeometry relative="1" x="-0.4597" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E4" edge="1" parent="1" source="N3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=none;strokeColor=light-dark(#000000,#0000CC);" target="N5" value="&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(51, 153, 255)); background-color: light-dark(rgb(255, 255, 255), rgb(255, 255, 255));&quot;&gt;No (Flow-initiation or&lt;br&gt;specific protocol like DNS)&lt;/span&gt;">
+          <mxGeometry relative="1" x="-0.26" y="20" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E5" edge="1" parent="1" source="N5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#0000CC);" target="N6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E6" edge="1" parent="1" source="N6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#0000CC);" target="N7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E7" edge="1" parent="1" source="N6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=light-dark(#000000,#0000CC);" target="N8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

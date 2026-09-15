@@ -1,0 +1,5 @@
+Qual o problema ou desafio tratado pelo artigo?
+Qual a proposta (algoritmo, arquitetura, ferramenta, ...) apresentada pelos autores?
+Quais os resultados obtidos pelos autores? (se aplicável)
+Conclusões dos autores.
+Comentários pessoais do aluno (aprendizados e dificuldades)

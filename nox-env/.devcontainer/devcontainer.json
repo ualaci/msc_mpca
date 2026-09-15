@@ -1,0 +1,14 @@
+{
+    "name": "NOX Legacy Environment",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python"
+            ]
+        }
+    },
+    "remoteUser": "root"
+}

@@ -44,18 +44,17 @@
 %------------------------------------------------
 
 \begin{frame}{O Caos do Gerenciamento Tradicional}
-    \textbf{Hook:} \textit{"Por que gerenciar redes continua tão difícil?"}
+    Por que gerenciar redes continua tão difícil?
     
     \vspace{0.5cm}
     
-    \begin{itemize}
+    \begin{itemize}            
         \item \textbf{Gestão Fragmentada:} Configuração manual de componentes isolados.
         \item \textbf{Políticas Engessadas:} Dependentes da topologia e do baixo nível (IPs, MACs).
         \item \textbf{Analogia:} Redes operam hoje como os computadores operavam antes da invenção do Sistema Operacional.
     \end{itemize}
     
     \vspace{0.3cm}
-    \imageplaceholder{Esquema de uma rede confusa / emaranhado de protocolos}
 \end{frame}
 
 %------------------------------------------------
@@ -63,33 +62,65 @@
 %------------------------------------------------
 
 \begin{frame}{NOX: O Sistema Operacional de Redes}
-    \textbf{Hook:} \textit{"E se a rede inteira pudesse ser controlada como uma única máquina?"}
+    E se a rede inteira pudesse ser controlada como uma única máquina?
     
     \vspace{0.5cm}
     
-    \begin{itemize}
+    \begin{itemize}            
         \item \textbf{Visão Centralizada:} Uma única interface de programação para toda a infraestrutura.
         \item \textbf{Abstração de Nomes:} Operação sobre Identidades (Usuários) ao invés de Endereços.
         \item \textbf{OpenFlow:} O protocolo que permite o controle do roteamento no plano de dados.
     \end{itemize}
     
     \vspace{0.3cm}
-    \imageplaceholder{Diagrama Controle vs. Plano de Dados (Controller central)}
 \end{frame}
 
 \begin{frame}{Arquitetura e Comportamento}
-    \textbf{Hook:} \textit{"Toda a complexidade resolvida na análise do primeiro pacote."}
+    Toda a complexidade resolvida na análise do primeiro pacote.
     
     \vspace{0.5cm}
     
-    \begin{itemize}
+    \begin{itemize}            
         \item \textbf{Network View:} Um banco de dados que mantêm a topologia global atualizada.
         \item \textbf{Reação a Eventos:} Switches delegam os fluxos desconhecidos ao Controlador.
         \item \textbf{Programação Lógica:} As aplicações (ex: Firewall, Roteamento) rodam em cima do NOX, e não nos switches.
     \end{itemize}
-
+    
     \vspace{0.3cm}
-    \imageplaceholder{Ciclo de vida do processamento de pacotes (Switch -> Controlador -> Fluxo)}
+    \textit{* Veja o diagrama detalhado no próximo slide.}
+\end{frame}
+
+\begin{frame}[plain]
+    \begin{center}    
+        \includegraphics[width=\textwidth,height=0.95\textheight,keepaspectratio]{diagrams/diagram1_operation.png}
+        
+        \vspace{0.1cm}
+        \scriptsize \textit{Fonte: Elaborado pelo autor.}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Exemplo Prático (POX/Mininet)}
+    Como a teoria de Observação e Controle se traduz na prática?
+    
+    \vspace{0.5cm}
+    
+    \begin{itemize}            
+        \item \textbf{Cenário Isolado:} 1 Switch Virtual (Open vSwitch) e 3 Hosts conectados.
+        \item \textbf{Observação (Table Miss):} O \textit{ping} inicial gera um \textit{PacketIn} direto para o Controlador POX.
+        \item \textbf{Controle (Hub):} O POX responde com uma ação OpenFlow (OFPP\_FLOOD) anexada aos dados do pacote, permitindo o roteamento de 100\% dos pacotes no teste.
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textit{* Veja o diagrama do laboratório no próximo slide.}
+\end{frame}
+
+\begin{frame}[plain]
+    \begin{center}    
+        \includegraphics[width=\textwidth,height=0.95\textheight,keepaspectratio]{diagrams/diagram3_example.png}
+        
+        \vspace{0.1cm}
+        \scriptsize \textit{Fonte: Elaborado pelo autor.}
+    \end{center}
 \end{frame}
 
 %------------------------------------------------
@@ -97,18 +128,17 @@
 %------------------------------------------------
 
 \begin{frame}{A Prova de Conceito: Resultados e Escalabilidade}
-    \textbf{Hook:} \textit{"É possível ter controle centralizado sem sacrificar desempenho?"}
+    É possível ter controle centralizado sem sacrificar desempenho?
     
     \vspace{0.5cm}
     
-    \begin{itemize}
+    \begin{itemize}            
         \item \textbf{Altíssimo Throughput:} +100.000 inícios de fluxo processados por segundo (Hardware Comum).
         \item \textbf{Drástica Redução de Código:} O projeto \textit{Ethane} foi reduzido de 45.000 linhas de C++ para poucas milhares de linhas de Python.
         \item \textbf{Homologado na Prática:} Único provedor de rede ativo em 30 hosts por +6 meses.
     \end{itemize}
-
+    
     \vspace{0.3cm}
-    \imageplaceholder{Gráfico comparativo de desempenho / linhas de código}
 \end{frame}
 
 %------------------------------------------------
@@ -116,17 +146,16 @@
 %------------------------------------------------
 
 \begin{frame}{Conclusões do Estudo}
-    \textbf{Hook:} \textit{"O legado que o NOX deixou para o futuro das Redes (SDN)."}
+    O legado que o NOX deixou para o futuro das Redes (SDN).
     
     \vspace{0.5cm}
     
-    \begin{itemize}
+    \begin{itemize}            
         \item \textbf{Fim do Paradigma Distribuído:} Escala massiva não requer algoritmos totalmente distribuídos.
         \item \textbf{Aceleração da Inovação:} Facilita desenvolvimento de redes sem se preocupar com limitações de hardware ou fabricantes.
     \end{itemize}
-
+    
     \vspace{0.3cm}
-    \imageplaceholder{Linha do tempo / transição de redes legadas para SDN}
 \end{frame}
 
 %------------------------------------------------
@@ -134,34 +163,41 @@
 %------------------------------------------------
 
 \begin{frame}{Visão Pessoal: Lições e Dificuldades}
-    \textbf{Hook:} \textit{"Uma nova forma de pensar a conectividade."}
+    Uma nova forma de pensar a conectividade.
     
     \vspace{0.5cm}
     
     \begin{columns}[T]
         \begin{column}{0.48\textwidth}
             \textbf{Principais Lições}
-            \begin{itemize}
+            \begin{itemize}            
                 \item Desacoplar Inteligência (Controle) do Hardware (Dados) é revolucionário.
                 \item Gerência tratada como Engenharia de Software pura.
             \end{itemize}
         \end{column}
         \begin{column}{0.48\textwidth}
             \textbf{Desafios e Dificuldades}
-            \begin{itemize}
+            \begin{itemize}            
                 \item Desconstruir o modelo mental dos protocolos convencionais (BGP/OSPF).
                 \item Compreender a gerência do "Ponto único de falha" sob a lógica centralizada.
             \end{itemize}
         \end{column}
     \end{columns}
-
+    
     \vspace{0.3cm}
-    \imageplaceholder{Ícone ilustrando um desafio / barreira ultrapassada}
 \end{frame}
 
 %------------------------------------------------
 
-\begin{frame}
+\begin{frame}{Referências}
+    \begin{itemize}    
+        \item GUDE, Natasha et al. \textbf{NOX: Towards an Operating System for Networks}. ACM SIGCOMM Computer Communication Review, v. 38, n. 3, p. 105-110, 2008.
+    \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}            
     \Huge{\centerline{\textbf{Obrigado}}}
 \end{frame}
 

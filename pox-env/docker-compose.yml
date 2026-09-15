@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  sdn-demo:
+    build: .
+    container_name: sdn-demo
+    # Mininet requires privileged mode to manipulate network namespaces and interfaces
+    privileged: true
+    volumes:
+      - .:/workspace
+      - /lib/modules:/lib/modules:ro  # Required for OpenVSwitch kernel module
+    # Keep the container running in the background
+    command: tail -f /dev/null
